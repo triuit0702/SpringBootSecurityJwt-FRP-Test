@@ -1,0 +1,68 @@
+CREATE DATABASE travel_list DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE travel_list;
+
+create table places(
+id int NOT NULL AUTO_INCREMENT,
+name varchar(255) NULL,
+visited TINYINT(1) NULL,
+PRIMARY KEY (id)
+);
+
+Insert into places(name, visited) value('Tokyo', 0);
+Insert into places(name, visited) value('Sai Gon', 1);
+Insert into places(name, visited) value('Ha Noi', 0);
+
+
+create table role (
+id int NOT NULL AUTO_INCREMENT,
+code varchar(255) NULL,
+name varchar(255) NULL,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE `users` (
+	id int NOT NULL AUTO_INCREMENT,
+    username varchar(100) NULL,
+    password varchar(100) NULL,
+     fullname varchar(100) NULL,
+  PRIMARY KEY (id)
+);
+
+ 
+CREATE TABLE `user_role` (
+  user_id int NOT NULL,
+  role_id int NOT NULL,
+  KEY user_fk_idx (`user_id`),
+  KEY role_fk_idx (`role_id`),
+  CONSTRAINT role_fk FOREIGN KEY (role_id) REFERENCES role (id),
+  CONSTRAINT user_fk FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+
+insert into role(code,name) values('ADMIN','Quản trị hệ thống');
+insert into role(code,name) values('USER','Nhân viên');
+insert into role(code,name) values('MANAGER','Quản lý');
+
+insert into users(username,password,fullname)
+values('admin','$2a$10$7iZNnduBtl4Eo8IHivGTPucjnERcNnbdbyBONFqu3Zc/TjgajPSS2','admin');
+insert into users(username,password,fullname)
+values('user','$2a$10$7iZNnduBtl4Eo8IHivGTPucjnERcNnbdbyBONFqu3Zc/TjgajPSS2','user');
+insert into users(username,password,fullname)
+values('manager','$2a$10$7iZNnduBtl4Eo8IHivGTPucjnERcNnbdbyBONFqu3Zc/TjgajPSS2','manager');
+insert into users(username,password,fullname)
+values('test1','$2a$10$7iZNnduBtl4Eo8IHivGTPucjnERcNnbdbyBONFqu3Zc/TjgajPSS2','test1');
+insert into users(username,password,fullname)
+values('test2','$2a$10$7iZNnduBtl4Eo8IHivGTPucjnERcNnbdbyBONFqu3Zc/TjgajPSS2','test2');
+insert into users(username,password,fullname)
+values('test3','$2a$10$7iZNnduBtl4Eo8IHivGTPucjnERcNnbdbyBONFqu3Zc/TjgajPSS2','test3');
+insert into users(username,password,fullname)
+values('test4','$2a$10$7iZNnduBtl4Eo8IHivGTPucjnERcNnbdbyBONFqu3Zc/TjgajPSS2','test4');
+
+INSERT INTO user_role(user_id,role_id) VALUES (1,1);
+INSERT INTO user_role(user_id,role_id) VALUES (2,2);
+INSERT INTO user_role(user_id,role_id) VALUES (3,3);
+INSERT INTO user_role(user_id,role_id) VALUES (4,2);
+INSERT INTO user_role(user_id,role_id) VALUES (5,2);
+INSERT INTO user_role(user_id,role_id) VALUES (6,2);
+INSERT INTO user_role(user_id,role_id) VALUES (7,2);
