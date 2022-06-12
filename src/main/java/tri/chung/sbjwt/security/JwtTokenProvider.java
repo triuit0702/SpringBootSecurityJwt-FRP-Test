@@ -18,12 +18,14 @@ public class JwtTokenProvider {
 	private final String JWT_SECRET = "lodaaaaaa";
 
 	// Thời gian có hiệu lực của chuỗi jwt
-	private final long JWT_EXPIRATION = 604800000L;
+	//private final long JWT_EXPIRATION = 604800000L;
+	private final long JWT_EXPIRATION = 2*60*1000;
 
 	// create Jwt from information user
 	public String generateToken(Long userId) {
 		Date now = new Date();
-		Date expiredDate = new Date(now.getTime() + JWT_EXPIRATION);
+		//Date expiredDate = new Date(now.getTime() + JWT_EXPIRATION);
+		Date expiredDate = new Date(System.currentTimeMillis() + JWT_EXPIRATION);
 		// create jwt from id of user
 		return Jwts.builder().setSubject(Long.toString(userId)).setIssuedAt(now).setExpiration(expiredDate)
 				.signWith(SignatureAlgorithm.HS512, JWT_SECRET).compact();
